@@ -1,7 +1,9 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ml-container
+  name: ml-deployment
+  namespace: joaojunior
 spec:
   replicas: 1
   selector:
@@ -15,6 +17,7 @@ spec:
       containers:
       - name: ml-container
         image: joaoesjunior/ml-container:0.1
+        command: ["python", "/app/train_model.py"]
         volumeMounts:
         - name: shared-volume
           mountPath: /home/joaojunior/project2-pv2

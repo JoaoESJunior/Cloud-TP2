@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-container
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-container
+  template:
+    metadata:
+      labels:
+        app: api-container
+    spec:
+      containers:
+      - name: api-container
+        image: joaoesjunior/api-container:0.1
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: shared-volume
+          mountPath: /home/joaojunior/project2-pv2
+      volumes:
+      - name: shared-volume
+        persistentVolumeClaim:
+          claimName: pvc-project2

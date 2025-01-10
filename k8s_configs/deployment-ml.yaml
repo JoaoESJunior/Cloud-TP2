@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-container
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-container
+  template:
+    metadata:
+      labels:
+        app: ml-container
+    spec:
+      containers:
+      - name: ml-container
+        image: joaoesjunior/ml-container:0.1
+        volumeMounts:
+        - name: shared-volume
+          mountPath: /home/joaojunior/project2-pv2
+      volumes:
+      - name: shared-volume
+        persistentVolumeClaim:
+          claimName: pvc-project2
